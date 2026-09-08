@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>もしものとき、あなたは。</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family:
+        "Noto Sans JP",
+        "Yu Gothic",
+        sans-serif;
+    background: #f5f4ef;
+    color: #222;
+    line-height: 1.8;
+}
+
+/* --------------------
+   全体
+-------------------- */
+
+.screen {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.container {
+    width: min(900px, 100%);
+    margin: auto;
+}
+
+/* --------------------
+   INTRO
+-------------------- */
+
+#intro {
+    text-align: center;
+    background:
+        radial-gradient(circle at center, #ffffff 0%, #f5f4ef 70%);
+}
+
+.intro-label {
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    margin-bottom: 25px;
+    color: #777;
+}
+
+h1 {
+    font-size: clamp(38px, 7vw, 80px);
+    line-height: 1.2;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.intro-text {
+    font-size: 18px;
+    margin-bottom: 50px;
+}
+	
+	/* --------------------
+   BUTTON
+-------------------- */
+
+button {
+    border: none;
+    background: #222;
+    color: white;
+    padding: 16px 40px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    opacity: 0.85;
+}
+
+/* --------------------
+   CARD
+-------------------- */
+
+.card {
+    background: white;
+    padding: clamp(30px, 6vw, 70px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+}
+
+.section-number {
+    font-size: 14px;
+    color: #999;
+    letter-spacing: 0.15em;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: clamp(28px, 5vw, 48px);
+    line-height: 1.4;
+    margin-bottom: 30px;
+}
+
+/* --------------------
+   PROFILE
+-------------------- */
+
+.profile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.profile-item {
+    background: #f5f4ef;
+    padding: 20px;
+}
+
+.profile-label {
+    font-size: 13px;
+    color: #888;
+}
+
+.profile-value {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* --------------------
+   EVENT
+-------------------- */
+
+.event {
+    text-align: center;
+}
+
+.event-warning {
+    font-size: 18px;
+    color: #b33;
+    margin-bottom: 20px;
+}
+
+.event-title {
+    font-size: clamp(40px, 8vw, 80px);
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.event-description {
+    margin-bottom: 40px;
+}
+
+/* --------------------
+   MONEY
+-------------------- */
+
+.money-area {
+    margin: 40px 0;
+}
+
+.money {
+    font-size: clamp(40px, 8vw, 70px);
+    font-weight: bold;
+    text-align: center;
+}
+
+.money.minus {
+    animation: shake 0.4s;
+}
+
+@keyframes shake {
+
+    0% { transform: translateX(0); }
+
+    25% { transform: translateX(-8px); }
+
+    50% { transform: translateX(8px); }
+
+    75% { transform: translateX(-8px); }
+
+    100% { transform: translateX(0); }
+
+}
+
+/* --------------------
+   CHOICE
+-------------------- */
+
+.choice-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.choice {
+    background: #f5f4ef;
+    color: #222;
+    padding: 30px;
+    text-align: left;
+}
+
+.choice:hover {
+    background: #e8e6df;
+}
+
+.choice-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* --------------------
+   RESULT
+-------------------- */
+
+.result {
+    text-align: center;
+}
+
+.result-money {
+    font-size: clamp(45px, 10vw, 90px);
+    font-weight: bold;
+    margin: 30px 0;
+}
+
+.result-message {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+/* --------------------
+   HIDDEN
+-------------------- */
+
+.hidden {
+    display: none;
+}
+
+/* --------------------
+   MOBILE
+-------------------- */
+
+@media (max-width: 600px) {
+
+    .profile {
+        grid-template-columns: 1fr;
+    }
+
+    .choice-area {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 30px 20px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ====================
+     INTRO
+===================== -->
+
+<section id="intro" class="screen">
+
+    <div class="container">
+
+        <div class="intro-label">
+            LIFE × INSURANCE
+        </div>
+
+        <h1>
+            もしものとき、<br>
+            あなたは。
+        </h1>
+
+        <p class="intro-text">
+            保険について、考えたことはありますか？
+        </p>
+
+        <button onclick="startExperience()">
+            体験してみる
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ====================
+     PROFILE
+===================== -->
+
+<section id="profileScreen" class="screen hidden">
+
+    <div class="container">
+
+        <div class="card">
+
+            <div class="section-number">
+                STEP 01
+            </div>
+
+            <h2>
+                まずは、あなたの<br>
+                生活を見てみよう。
+            </h2>
+
+            <div class="profile">
+
+                <div class="profile-item">
+
+                    <div class="profile-label">
+                        年齢
+                    </div>
+
+                    <div class="profile-value">
+                        23歳
+                    </div>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <div class="profile-label">
+                        職業
+                    </div>
+
+                    <div class="profile-value">
+                        新社会人
+                    </div>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <div class="profile-label">
+                        月収
+                    </div>
+
+                    <div class="profile-value">
+                        ¥240,000
+                    </div>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <div class="profile-label">
+                        貯金
+                    </div>
+
+                    <div class="profile-value">
+                        ¥300,000
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button onclick="startEvent()">
+                生活を始める
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+	
+<!-- ====================
+     EVENT
+===================== -->
+
+<section id="eventScreen" class="screen hidden">
+
+    <div class="container">
+
+        <div class="card event">
+
+            <div class="section-number">
+                STEP 02
+            </div>
+
+            <div class="event-warning">
+                ある日、
+            </div>
+
+            <div class="event-title">
+                入院。
+            </div>
+
+            <p class="event-description">
+                突然、病気になってしまいました。<br>
+                しばらく仕事を休むことになりそうです。
+            </p>
+
+            <button onclick="showCost()">
+                かかったお金を見る
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ====================
+     MONEY
+===================== -->
+
+<section id="moneyScreen" class="screen hidden">
+
+    <div class="container">
+
+        <div class="card">
+
+            <div class="section-number">
+                STEP 03
+            </div>
+
+            <h2>
+                もしものとき、<br>
+                お金はどうなる？
+            </h2>
+
+            <div class="money-area">
+
+                <div id="money" class="money">
+                    ¥300,000
+                </div>
+
+            </div>
+
+            <p id="costText">
+                入院費：¥100,000
+            </p>
+
+            <button onclick="nextCost()">
+                次へ
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ====================
+     CHOICE
+===================== -->
+
+<section id="choiceScreen" class="screen hidden">
+
+    <div class="container">
+
+        <div class="card">
+
+            <div class="section-number">
+                STEP 04
+            </div>
+
+            <h2>
+                もし、あなたが<br>
+                保険に入っていたら？
+            </h2>
+
+            <p>
+                あなたなら、どうしますか？
+            </p>
+
+
+            <div class="choice-area">
+
+                <button
+                    class="choice"
+                    onclick="chooseInsurance(true)"
+                >
+
+                    <div class="choice-title">
+                        保険に入っている
+                    </div>
+
+                    <div>
+                        保険から給付を受け取る
+                    </div>
+
+                </button>
+
+
+                <button
+                    class="choice"
+                    onclick="chooseInsurance(false)"
+                >
+
+                    <div class="choice-title">
+                        保険に入っていない
+                    </div>
+
+                    <div>
+                        自分のお金から支払う
+                    </div>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ====================
+     RESULT
+===================== -->
+
+<section id="resultScreen" class="screen hidden">
+
+    <div class="container">
+
+        <div class="card result">
+
+            <div class="section-number">
+                RESULT
+            </div>
+
+            <h2>
+                あなたの生活には<br>
+                どんな変化があった？
+            </h2>
+
+            <div id="resultMoney"
+                 class="result-money">
+                ¥200,000
+            </div>
+
+            <p id="resultMessage"
+               class="result-message">
+            </p>
+
+            <button onclick="showEnding()">
+                もう少し考えてみる
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ====================
+     ENDING
+===================== -->
+
+<section id="endingScreen" class="screen hidden">
+
+    <div class="container">
+
+        <div class="card">
+
+            <div class="section-number">
+                LAST
+            </div>
+
+            <h2>
+                大切なのは、<br>
+                「入る」ことではなく<br>
+                「知る」こと。
+            </h2>
+
+            <p>
+                保険は、必要な人もいれば、<br>
+                必要ではない人もいます。
+            </p>
+
+            <br>
+
+            <p>
+                でも、知らないまま決めてしまうのは<br>
+                もったいないかもしれません。
+            </p>
+
+            <br>
+
+            <p>
+                まずは、自分にどんなリスクがあるのか。<br>
+                そして、どんな選択肢があるのか。
+            </p>
+
+            <br>
+
+            <p>
+                <strong>
+                    知ったうえで、自分の答えを選ぶ。
+                </strong>
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* ====================
+   画面切り替え
+===================== */
+
+function showScreen(id) {
+
+    const screens = [
+        "intro",
+        "profileScreen",
+        "eventScreen",
+        "moneyScreen",
+        "choiceScreen",
+        "resultScreen",
+        "endingScreen"
+    ];
+
+    screens.forEach(function(screen) {
+
+        document
+            .getElementById(screen)
+            .classList.add("hidden");
+
+    });
+
+    document
+        .getElementById(id)
+        .classList.remove("hidden");
+
+}
+
+
+/* ====================
+   START
+===================== */
+
+function startExperience() {
+
+    showScreen("profileScreen");
+
+}
+
+
+/* ====================
+   EVENT
+===================== */
+
+function startEvent() {
+
+    showScreen("eventScreen");
+
+}
+
+
+/* ====================
+   MONEY
+===================== */
+
+let money = 300000;
+
+let costStep = 0;
+
+function showCost() {
+
+    showScreen("moneyScreen");
+
+    money = 300000;
+
+    costStep = 0;
+
+    updateMoney();
+
+}
+
+
+function nextCost() {
+
+    const moneyElement =
+        document.getElementById("money");
+
+    const costText =
+        document.getElementById("costText");
+
+
+    if (costStep === 0) {
+
+        money -= 100000;
+
+        costText.innerText =
+            "入院費：¥100,000";
+
+        costStep++;
+
+    }
+
+    else if (costStep === 1) {
+
+        money -= 50000;
+
+        costText.innerText =
+            "仕事を休んだことによる収入減：¥50,000";
+
+        costStep++;
+
+    }
+
+    else {
+
+        showScreen("choiceScreen");
+
+        return;
+
+    }
+
+
+    updateMoney();
+
+    moneyElement.classList.remove("minus");
+
+    void moneyElement.offsetWidth;
+
+    moneyElement.classList.add("minus");
+
+}
+
+
+function updateMoney() {
+
+    document
+        .getElementById("money")
+        .innerText =
+        "¥" + money.toLocaleString();
+
+}
+
+	/* ====================
+   CHOICE
+===================== */
+
+function chooseInsurance(hasInsurance) {
+
+    showScreen("resultScreen");
+
+    const resultMoney =
+        document.getElementById("resultMoney");
+
+    const resultMessage =
+        document.getElementById("resultMessage");
+
+
+    if (hasInsurance) {
+
+        resultMoney.innerText =
+            "¥250,000";
+
+        resultMessage.innerText =
+            "保険から給付を受け取ることで、\n\
+             手元のお金への影響を抑えられました。";
+
+    }
+
+    else {
+
+        resultMoney.innerText =
+            "¥150,000";
+
+        resultMessage.innerText =
+            "突然の出費によって、\n\
+             貯金が大きく減ってしまいました。";
+
+    }
+
+}
+
+
+/* ====================
+   ENDING
+===================== */
+
+function showEnding() {
+
+    showScreen("endingScreen");
+
+}
+
+</script>
+
+
+</body>
+</html>
