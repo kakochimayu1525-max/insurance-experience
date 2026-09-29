@@ -3,820 +3,795 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>もしものとき、あなたは。</title>
 
 <style>
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body {
-    font-family:
-        "Noto Sans JP",
-        "Yu Gothic",
-        sans-serif;
-    background: #f5f4ef;
-    color: #222;
-    line-height: 1.8;
+:root{
+    --paper:#f5f4ef;
+    --ink:#171717;
+    --red:#d83a32;
+    --line:#171717;
+    --muted:#777;
 }
 
-/* --------------------
-   全体
--------------------- */
-
-.screen {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 20px;
+html{
+    scroll-behavior:smooth;
 }
 
-.container {
-    width: min(900px, 100%);
-    margin: auto;
+body{
+    font-family:"Noto Sans JP","Yu Gothic",sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.8;
+    transition:background .5s ease,color .5s ease;
 }
 
-/* --------------------
-   INTRO
--------------------- */
-
-#intro {
-    text-align: center;
-    background:
-        radial-gradient(circle at center, #ffffff 0%, #f5f4ef 70%);
+body.dark{
+    --paper:#171717;
+    --ink:#f5f4ef;
+    --line:#f5f4ef;
+    background:#171717;
+    color:#f5f4ef;
 }
 
-.intro-label {
-    font-size: 14px;
-    letter-spacing: 0.2em;
-    margin-bottom: 25px;
-    color: #777;
+body.black{
+    background:#000;
+    color:#fff;
+    --ink:#fff;
+    --line:#fff;
+    --paper:#000;
 }
 
-h1 {
-    font-size: clamp(38px, 7vw, 80px);
-    line-height: 1.2;
-    margin-bottom: 30px;
-    font-weight: 700;
+.hidden{
+    display:none !important;
 }
 
-.intro-text {
-    font-size: 18px;
-    margin-bottom: 50px;
-}
-	
-	/* --------------------
-   BUTTON
--------------------- */
-
-button {
-    border: none;
-    background: #222;
-    color: white;
-    padding: 16px 40px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
+.screen{
+    min-height:100svh;
+    padding:28px 7vw 60px;
+    position:relative;
+    display:flex;
+    align-items:center;
 }
 
-button:hover {
-    transform: translateY(-3px);
-    opacity: 0.85;
+.wrap{
+    width:min(920px,100%);
+    margin:auto;
 }
 
-/* --------------------
-   CARD
--------------------- */
-
-.card {
-    background: white;
-    padding: clamp(30px, 6vw, 70px);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+/* 共通の細い情報 */
+.topline{
+    position:absolute;
+    top:25px;
+    left:7vw;
+    right:7vw;
+    display:flex;
+    justify-content:space-between;
+    font-size:11px;
+    letter-spacing:.12em;
+    color:var(--muted);
+    text-transform:uppercase;
 }
 
-.section-number {
-    font-size: 14px;
-    color: #999;
-    letter-spacing: 0.15em;
-    margin-bottom: 20px;
+body.dark .topline,
+body.black .topline{
+    color:#999;
 }
 
-h2 {
-    font-size: clamp(28px, 5vw, 48px);
-    line-height: 1.4;
-    margin-bottom: 30px;
+.step{
+    font-size:12px;
+    letter-spacing:.18em;
+    margin-bottom:38px;
+    color:var(--muted);
 }
 
-/* --------------------
-   PROFILE
--------------------- */
-
-.profile {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin: 30px 0;
+.step span{
+    color:var(--red);
+    font-weight:700;
 }
 
-.profile-item {
-    background: #f5f4ef;
-    padding: 20px;
+h1,h2{
+    font-weight:800;
+    letter-spacing:-.04em;
 }
 
-.profile-label {
-    font-size: 13px;
-    color: #888;
+button{
+    font:inherit;
+    border:0;
+    cursor:pointer;
 }
 
-.profile-value {
-    font-size: 24px;
-    font-weight: bold;
+/* INTRO */
+#intro{
+    text-align:left;
+    overflow:hidden;
 }
 
-/* --------------------
-   EVENT
--------------------- */
-
-.event {
-    text-align: center;
+.intro-mark{
+    width:54px;
+    height:8px;
+    background:var(--red);
+    margin-bottom:42px;
 }
 
-.event-warning {
-    font-size: 18px;
-    color: #b33;
-    margin-bottom: 20px;
+.intro-small{
+    font-size:13px;
+    letter-spacing:.12em;
+    margin-bottom:20px;
 }
 
-.event-title {
-    font-size: clamp(40px, 8vw, 80px);
-    font-weight: bold;
-    margin-bottom: 20px;
+.intro-title{
+    font-size:clamp(48px,9vw,112px);
+    line-height:1.05;
+    margin-bottom:42px;
 }
 
-.event-description {
-    margin-bottom: 40px;
+.intro-title em{
+    color:var(--red);
+    font-style:normal;
 }
 
-/* --------------------
-   MONEY
--------------------- */
-
-.money-area {
-    margin: 40px 0;
+.intro-copy{
+    max-width:530px;
+    font-size:16px;
+    margin-bottom:55px;
 }
 
-.money {
-    font-size: clamp(40px, 8vw, 70px);
-    font-weight: bold;
-    text-align: center;
+.start{
+    background:var(--ink);
+    color:var(--paper);
+    padding:17px 34px;
+    border:1px solid var(--ink);
+    transition:.25s;
 }
 
-.money.minus {
-    animation: shake 0.4s;
+.start:hover{
+    background:var(--red);
+    border-color:var(--red);
 }
 
-@keyframes shake {
-
-    0% { transform: translateX(0); }
-
-    25% { transform: translateX(-8px); }
-
-    50% { transform: translateX(8px); }
-
-    75% { transform: translateX(-8px); }
-
-    100% { transform: translateX(0); }
-
+/* PROFILE */
+.profile-title{
+    font-size:clamp(36px,6vw,68px);
+    line-height:1.15;
+    margin-bottom:48px;
 }
 
-/* --------------------
-   CHOICE
--------------------- */
-
-.choice-area {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 40px;
+.profile-grid{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    display:grid;
+    grid-template-columns:1fr 1fr;
 }
 
-.choice {
-    background: #f5f4ef;
-    color: #222;
-    padding: 30px;
-    text-align: left;
+.profile-item{
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
 }
 
-.choice:hover {
-    background: #e8e6df;
+.profile-item:nth-child(odd){
+    padding-right:35px;
+    border-right:1px solid var(--line);
 }
 
-.choice-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
+.profile-item:nth-child(even){
+    padding-left:35px;
 }
 
-/* --------------------
-   RESULT
--------------------- */
-
-.result {
-    text-align: center;
+.profile-item:nth-last-child(-n+2){
+    border-bottom:0;
 }
 
-.result-money {
-    font-size: clamp(45px, 10vw, 90px);
-    font-weight: bold;
-    margin: 30px 0;
+.label{
+    font-size:12px;
+    color:var(--muted);
+    margin-bottom:5px;
 }
 
-.result-message {
-    font-size: 20px;
-    margin-bottom: 40px;
+.value{
+    font-size:clamp(23px,3vw,34px);
+    font-weight:700;
 }
 
-/* --------------------
-   HIDDEN
--------------------- */
-
-.hidden {
-    display: none;
+.next{
+    display:inline-flex;
+    align-items:center;
+    gap:25px;
+    margin-top:45px;
+    padding:0 0 7px;
+    background:none;
+    color:var(--ink);
+    border-bottom:2px solid var(--ink);
+    font-weight:700;
 }
 
-/* --------------------
-   MOBILE
--------------------- */
+.next::after{
+    content:"→";
+    font-size:23px;
+    transition:.2s;
+}
 
-@media (max-width: 600px) {
+.next:hover::after{
+    transform:translateX(7px);
+}
 
-    .profile {
-        grid-template-columns: 1fr;
+/* EVENT */
+#eventScreen{
+    text-align:left;
+}
+
+.event-word{
+    font-size:clamp(72px,16vw,180px);
+    line-height:.9;
+    letter-spacing:-.08em;
+    margin:25px 0 35px;
+}
+
+.event-word::before{
+    content:"ある日、";
+    display:block;
+    font-size:16px;
+    letter-spacing:.08em;
+    line-height:1;
+    color:var(--red);
+    margin-bottom:24px;
+}
+
+.event-copy{
+    border-left:4px solid var(--red);
+    padding-left:20px;
+    max-width:560px;
+    margin-bottom:48px;
+}
+
+/* MONEY */
+.money-title{
+    font-size:clamp(35px,6vw,65px);
+    line-height:1.2;
+    margin-bottom:50px;
+}
+
+.money-box{
+    border-top:2px solid var(--line);
+    border-bottom:2px solid var(--line);
+    padding:28px 0 24px;
+    margin-bottom:28px;
+}
+
+.money-label{
+    font-size:12px;
+    color:var(--muted);
+}
+
+.money{
+    font-size:clamp(58px,11vw,105px);
+    font-weight:800;
+    letter-spacing:-.05em;
+    line-height:1.05;
+}
+
+.money-change{
+    min-height:30px;
+    margin-top:13px;
+    font-size:14px;
+}
+
+.money.minus{
+    animation:money .38s ease;
+}
+
+@keyframes money{
+    0%{transform:translateX(0)}
+    25%{transform:translateX(-8px)}
+    50%{transform:translateX(8px)}
+    75%{transform:translateX(-4px)}
+    100%{transform:translateX(0)}
+}
+
+.note{
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:35px;
+}
+
+/* CHOICE */
+.choice-title{
+    font-size:clamp(35px,6vw,65px);
+    line-height:1.2;
+    margin-bottom:18px;
+}
+
+.choice-lead{
+    margin-bottom:45px;
+}
+
+.choices{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+}
+
+.choice{
+    background:transparent;
+    color:var(--ink);
+    text-align:left;
+    padding:30px 25px 32px 0;
+    transition:.25s;
+}
+
+.choice + .choice{
+    border-left:1px solid var(--line);
+    padding-left:25px;
+}
+
+.choice-number{
+    font-size:12px;
+    color:var(--red);
+    margin-bottom:20px;
+}
+
+.choice-name{
+    font-size:clamp(20px,3vw,30px);
+    font-weight:800;
+    margin-bottom:12px;
+}
+
+.choice-detail{
+    font-size:13px;
+    color:var(--muted);
+}
+
+.choice:hover{
+    color:var(--red);
+    transform:translateY(-3px);
+}
+
+/* RESULT */
+.result-kicker{
+    color:var(--red);
+    font-weight:700;
+    margin-bottom:18px;
+}
+
+.result-title{
+    font-size:clamp(38px,7vw,76px);
+    line-height:1.15;
+    margin-bottom:48px;
+}
+
+.result-money{
+    font-size:clamp(65px,13vw,130px);
+    line-height:1;
+    font-weight:800;
+    letter-spacing:-.06em;
+    padding-bottom:28px;
+    border-bottom:2px solid var(--line);
+    margin-bottom:28px;
+}
+
+.result-message{
+    white-space:pre-line;
+    max-width:600px;
+    margin-bottom:42px;
+}
+
+/* LAST */
+#endingScreen{
+    text-align:left;
+}
+
+.last-mark{
+    font-size:12px;
+    letter-spacing:.2em;
+    color:var(--red);
+    margin-bottom:35px;
+}
+
+.last-title{
+    font-size:clamp(40px,7vw,76px);
+    line-height:1.2;
+    margin-bottom:45px;
+}
+
+.last-title .red{
+    color:var(--red);
+}
+
+.last-copy{
+    max-width:620px;
+    font-size:16px;
+}
+
+.last-copy p{
+    margin-bottom:24px;
+}
+
+.last-final{
+    margin-top:55px;
+    padding-top:25px;
+    border-top:1px solid var(--line);
+    font-weight:800;
+    font-size:20px;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+    .screen{
+        padding:70px 24px 45px;
+        align-items:flex-start;
     }
 
-    .choice-area {
-        grid-template-columns: 1fr;
+    .topline{
+        left:24px;
+        right:24px;
+        top:22px;
     }
 
-    .card {
-        padding: 30px 20px;
+    .intro-title{
+        font-size:54px;
     }
 
+    .intro-copy{
+        font-size:15px;
+    }
+
+    .profile-grid,
+    .choices{
+        grid-template-columns:1fr;
+    }
+
+    .profile-item,
+    .profile-item:nth-child(odd),
+    .profile-item:nth-child(even){
+        padding:18px 0;
+        border-right:0;
+        border-bottom:1px solid var(--line);
+    }
+
+    .profile-item:last-child{
+        border-bottom:0;
+    }
+
+    .choice + .choice{
+        border-left:0;
+        border-top:1px solid var(--line);
+        padding-left:0;
+    }
+
+    .choice{
+        padding:25px 0;
+    }
+
+    .event-word{
+        font-size:88px;
+        margin-top:55px;
+    }
 }
-
 </style>
 </head>
 
-
 <body>
 
-
-<!-- ====================
-     INTRO
-===================== -->
-
+<!-- INTRO -->
 <section id="intro" class="screen">
+    <div class="topline">
+        <span>GRADUATION RESEARCH</span>
+        <span>01</span>
+    </div>
 
-    <div class="container">
+    <div class="wrap">
+        <div class="intro-mark"></div>
+        <div class="intro-small">もしものとき、あなたは。</div>
 
-        <div class="intro-label">
-            LIFE × INSURANCE
-        </div>
-
-        <h1>
-            もしものとき、<br>
-            あなたは。
+        <h1 class="intro-title">
+            もし、<br>
+            <em>明日</em>入院したら？
         </h1>
 
-        <p class="intro-text">
-            保険について、考えたことはありますか？
+        <p class="intro-copy">
+            いつも通りの生活が、少しだけ変わったとしたら。<br>
+            そのとき、自分の生活に何が起こるのかを体験してみてください。
         </p>
 
-        <button onclick="startExperience()">
-            体験してみる
-        </button>
-
+        <button class="start" onclick="startExperience()">体験をはじめる　→</button>
     </div>
-
 </section>
 
-
-<!-- ====================
-     PROFILE
-===================== -->
-
+<!-- PROFILE -->
 <section id="profileScreen" class="screen hidden">
-
-    <div class="container">
-
-        <div class="card">
-
-            <div class="section-number">
-                STEP 01
-            </div>
-
-            <h2>
-                まずは、あなたの<br>
-                生活を見てみよう。
-            </h2>
-
-            <div class="profile">
-
-                <div class="profile-item">
-
-                    <div class="profile-label">
-                        年齢
-                    </div>
-
-                    <div class="profile-value">
-                        23歳
-                    </div>
-
-                </div>
-
-
-                <div class="profile-item">
-
-                    <div class="profile-label">
-                        職業
-                    </div>
-
-                    <div class="profile-value">
-                        新社会人
-                    </div>
-
-                </div>
-
-
-                <div class="profile-item">
-
-                    <div class="profile-label">
-                        月収
-                    </div>
-
-                    <div class="profile-value">
-                        ¥240,000
-                    </div>
-
-                </div>
-
-
-                <div class="profile-item">
-
-                    <div class="profile-label">
-                        貯金
-                    </div>
-
-                    <div class="profile-value">
-                        ¥300,000
-                    </div>
-
-                </div>
-
-            </div>
-
-            <button onclick="startEvent()">
-                生活を始める
-            </button>
-
-        </div>
-
+    <div class="topline">
+        <span>あなたの生活</span>
+        <span>02</span>
     </div>
 
-</section>
-	
-<!-- ====================
-     EVENT
-===================== -->
+    <div class="wrap">
+        <div class="step"><span>STEP 01</span>　生活</div>
 
+        <h2 class="profile-title">
+            まずは、<br>
+            いつもの生活から。
+        </h2>
+
+        <div class="profile-grid">
+            <div class="profile-item">
+                <div class="label">年齢</div>
+                <div class="value">23歳</div>
+            </div>
+            <div class="profile-item">
+                <div class="label">職業</div>
+                <div class="value">新社会人</div>
+            </div>
+            <div class="profile-item">
+                <div class="label">月収</div>
+                <div class="value">¥240,000</div>
+            </div>
+            <div class="profile-item">
+                <div class="label">貯金</div>
+                <div class="value">¥300,000</div>
+            </div>
+        </div>
+
+        <button class="next" onclick="startEvent()">この生活を始める</button>
+    </div>
+</section>
+
+<!-- EVENT -->
 <section id="eventScreen" class="screen hidden">
-
-    <div class="container">
-
-        <div class="card event">
-
-            <div class="section-number">
-                STEP 02
-            </div>
-
-            <div class="event-warning">
-                ある日、
-            </div>
-
-            <div class="event-title">
-                入院。
-            </div>
-
-            <p class="event-description">
-                突然、病気になってしまいました。<br>
-                しばらく仕事を休むことになりそうです。
-            </p>
-
-            <button onclick="showCost()">
-                かかったお金を見る
-            </button>
-
-        </div>
-
+    <div class="topline">
+        <span>生活の変化</span>
+        <span>03</span>
     </div>
 
+    <div class="wrap">
+        <div class="step"><span>STEP 02</span>　もしものこと</div>
+
+        <div class="event-word">入院。</div>
+
+        <p class="event-copy">
+            突然、病気になってしまいました。<br>
+            しばらく仕事を休むことになりそうです。
+        </p>
+
+        <button class="next" onclick="showCost()">その後を見てみる</button>
+    </div>
 </section>
 
-
-<!-- ====================
-     MONEY
-===================== -->
-
+<!-- MONEY -->
 <section id="moneyScreen" class="screen hidden">
-
-    <div class="container">
-
-        <div class="card">
-
-            <div class="section-number">
-                STEP 03
-            </div>
-
-            <h2>
-                もしものとき、<br>
-                お金はどうなる？
-            </h2>
-
-            <div class="money-area">
-
-                <div id="money" class="money">
-                    ¥300,000
-                </div>
-
-            </div>
-
-            <p id="costText">
-                入院費：¥100,000
-            </p>
-
-            <button onclick="nextCost()">
-                次へ
-            </button>
-
-        </div>
-
+    <div class="topline">
+        <span>お金の変化</span>
+        <span>04</span>
     </div>
 
+    <div class="wrap">
+        <div class="step"><span>STEP 03</span>　お金</div>
+
+        <h2 class="money-title">
+            もしものとき、<br>
+            お金はどうなる？
+        </h2>
+
+        <div class="money-box">
+            <div class="money-label">今の貯金</div>
+            <div id="money" class="money">¥300,000</div>
+            <div id="costText" class="money-change">ここから、支出が発生します。</div>
+        </div>
+
+        <p class="note">
+            ※ここでは体験のため、入院費と仕事を休んだことによる収入減を簡略化して表現しています。
+        </p>
+
+        <button class="next" onclick="nextCost()">次へ進む</button>
+    </div>
 </section>
 
-
-<!-- ====================
-     CHOICE
-===================== -->
-
+<!-- CHOICE -->
 <section id="choiceScreen" class="screen hidden">
-
-    <div class="container">
-
-        <div class="card">
-
-            <div class="section-number">
-                STEP 04
-            </div>
-
-            <h2>
-                もし、あなたが<br>
-                保険に入っていたら？
-            </h2>
-
-            <p>
-                あなたなら、どうしますか？
-            </p>
-
-
-            <div class="choice-area">
-
-                <button
-                    class="choice"
-                    onclick="chooseInsurance(true)"
-                >
-
-                    <div class="choice-title">
-                        保険に入っている
-                    </div>
-
-                    <div>
-                        保険から給付を受け取る
-                    </div>
-
-                </button>
-
-
-                <button
-                    class="choice"
-                    onclick="chooseInsurance(false)"
-                >
-
-                    <div class="choice-title">
-                        保険に入っていない
-                    </div>
-
-                    <div>
-                        自分のお金から支払う
-                    </div>
-
-                </button>
-
-            </div>
-
-        </div>
-
+    <div class="topline">
+        <span>あなたの選択</span>
+        <span>05</span>
     </div>
 
-</section>
+    <div class="wrap">
+        <div class="step"><span>STEP 04</span>　選択</div>
 
+        <h2 class="choice-title">
+            ここで、<br>
+            あなたならどうする？
+        </h2>
 
-<!-- ====================
-     RESULT
-===================== -->
+        <p class="choice-lead">
+            もしものことが起こったとき、<br>
+            生活への影響はどう変わるでしょう。
+        </p>
 
-<section id="resultScreen" class="screen hidden">
-
-    <div class="container">
-
-        <div class="card result">
-
-            <div class="section-number">
-                RESULT
-            </div>
-
-            <h2>
-                あなたの生活には<br>
-                どんな変化があった？
-            </h2>
-
-            <div id="resultMoney"
-                 class="result-money">
-                ¥200,000
-            </div>
-
-            <p id="resultMessage"
-               class="result-message">
-            </p>
-
-            <button onclick="showEnding()">
-                もう少し考えてみる
+        <div class="choices">
+            <button class="choice" onclick="chooseInsurance(true)">
+                <div class="choice-number">01</div>
+                <div class="choice-name">保険に入っている</div>
+                <div class="choice-detail">保険から給付を受け取る</div>
             </button>
 
+            <button class="choice" onclick="chooseInsurance(false)">
+                <div class="choice-number">02</div>
+                <div class="choice-name">保険に入っていない</div>
+                <div class="choice-detail">自分のお金から支払う</div>
+            </button>
         </div>
-
     </div>
-
 </section>
 
+<!-- RESULT -->
+<section id="resultScreen" class="screen hidden">
+    <div class="topline">
+        <span>体験の結果</span>
+        <span>06</span>
+    </div>
 
-<!-- ====================
-     ENDING
-===================== -->
+    <div class="wrap">
+        <div class="step"><span>RESULT</span>　変化</div>
 
+        <div class="result-kicker">あなたの生活に起きた変化</div>
+
+        <h2 class="result-title">
+            残ったお金は、
+        </h2>
+
+        <div id="resultMoney" class="result-money">¥250,000</div>
+
+        <p id="resultMessage" class="result-message"></p>
+
+        <button class="next" onclick="showEnding()">もう少し考えてみる</button>
+    </div>
+</section>
+
+<!-- ENDING -->
 <section id="endingScreen" class="screen hidden">
-
-    <div class="container">
-
-        <div class="card">
-
-            <div class="section-number">
-                LAST
-            </div>
-
-            <h2>
-                大切なのは、<br>
-                「入る」ことではなく<br>
-                「知る」こと。
-            </h2>
-
-            <p>
-                保険は、必要な人もいれば、<br>
-                必要ではない人もいます。
-            </p>
-
-            <br>
-
-            <p>
-                でも、知らないまま決めてしまうのは<br>
-                もったいないかもしれません。
-            </p>
-
-            <br>
-
-            <p>
-                まずは、自分にどんなリスクがあるのか。<br>
-                そして、どんな選択肢があるのか。
-            </p>
-
-            <br>
-
-            <p>
-                <strong>
-                    知ったうえで、自分の答えを選ぶ。
-                </strong>
-            </p>
-
-        </div>
-
+    <div class="topline">
+        <span>最後に</span>
+        <span>07</span>
     </div>
 
-</section>
+    <div class="wrap">
+        <div class="last-mark">LAST</div>
 
+        <h2 class="last-title">
+            大切なのは、<br>
+            <span class="red">「入る」</span>ことではなく<br>
+            「知る」こと。
+        </h2>
+
+        <div class="last-copy">
+            <p>
+                保険は、必要な人もいれば、必要ではない人もいます。
+            </p>
+            <p>
+                だからこそ、まずは自分にどんなリスクがあるのか。
+                そして、どんな選択肢があるのかを知ることから。
+            </p>
+            <p>
+                この体験が、保険について考えるきっかけになれば。
+            </p>
+
+            <div class="last-final">
+                知ったうえで、自分の答えを選ぶ。
+            </div>
+        </div>
+    </div>
+</section>
 
 <script>
+const screens = [
+    "intro",
+    "profileScreen",
+    "eventScreen",
+    "moneyScreen",
+    "choiceScreen",
+    "resultScreen",
+    "endingScreen"
+];
 
-/* ====================
-   画面切り替え
-===================== */
-
-function showScreen(id) {
-
-    const screens = [
-        "intro",
-        "profileScreen",
-        "eventScreen",
-        "moneyScreen",
-        "choiceScreen",
-        "resultScreen",
-        "endingScreen"
-    ];
-
-    screens.forEach(function(screen) {
-
-        document
-            .getElementById(screen)
-            .classList.add("hidden");
-
+function showScreen(id){
+    screens.forEach(function(screen){
+        document.getElementById(screen).classList.add("hidden");
     });
 
-    document
-        .getElementById(id)
-        .classList.remove("hidden");
+    document.getElementById(id).classList.remove("hidden");
 
+    window.scrollTo({top:0, behavior:"smooth"});
 }
 
-
-/* ====================
-   START
-===================== */
-
-function startExperience() {
-
+function startExperience(){
+    document.body.classList.remove("dark","black");
     showScreen("profileScreen");
-
 }
 
-
-/* ====================
-   EVENT
-===================== */
-
-function startEvent() {
-
+function startEvent(){
+    document.body.classList.add("dark");
+    document.body.classList.remove("black");
     showScreen("eventScreen");
-
 }
-
-
-/* ====================
-   MONEY
-===================== */
 
 let money = 300000;
-
 let costStep = 0;
 
-function showCost() {
-
-    showScreen("moneyScreen");
+function showCost(){
+    document.body.classList.add("dark");
+    document.body.classList.remove("black");
 
     money = 300000;
-
     costStep = 0;
-
     updateMoney();
 
+    document.getElementById("costText").innerText =
+        "ここから、支出が発生します。";
+
+    showScreen("moneyScreen");
 }
 
+function nextCost(){
+    const moneyElement = document.getElementById("money");
+    const costText = document.getElementById("costText");
 
-function nextCost() {
-
-    const moneyElement =
-        document.getElementById("money");
-
-    const costText =
-        document.getElementById("costText");
-
-
-    if (costStep === 0) {
-
+    if(costStep === 0){
         money -= 100000;
-
-        costText.innerText =
-            "入院費：¥100,000";
-
+        costText.innerText = "入院費　− ¥100,000";
         costStep++;
-
-    }
-
-    else if (costStep === 1) {
-
+    }else if(costStep === 1){
         money -= 50000;
-
-        costText.innerText =
-            "仕事を休んだことによる収入減：¥50,000";
-
+        costText.innerText = "仕事を休んだことによる収入減　− ¥50,000";
         costStep++;
-
-    }
-
-    else {
-
+    }else{
         showScreen("choiceScreen");
-
         return;
-
     }
-
 
     updateMoney();
 
     moneyElement.classList.remove("minus");
-
     void moneyElement.offsetWidth;
-
     moneyElement.classList.add("minus");
-
 }
 
-
-function updateMoney() {
-
-    document
-        .getElementById("money")
-        .innerText =
+function updateMoney(){
+    document.getElementById("money").innerText =
         "¥" + money.toLocaleString();
-
 }
 
-	/* ====================
-   CHOICE
-===================== */
+function chooseInsurance(hasInsurance){
+    if(hasInsurance){
+        document.body.classList.remove("dark","black");
+        document.body.style.background = "#f5f4ef";
 
-function chooseInsurance(hasInsurance) {
+        document.getElementById("resultMoney").innerText = "¥250,000";
+        document.getElementById("resultMessage").innerText =
+            "保険から給付を受け取ることで、\n手元のお金への影響を抑えられました。";
+    }else{
+        document.body.classList.remove("dark");
+        document.body.classList.add("black");
+        document.body.style.background = "#000";
+
+        document.getElementById("resultMoney").innerText = "¥150,000";
+        document.getElementById("resultMessage").innerText =
+            "突然の出費によって、\n貯金が大きく減ってしまいました。";
+    }
 
     showScreen("resultScreen");
-
-    const resultMoney =
-        document.getElementById("resultMoney");
-
-    const resultMessage =
-        document.getElementById("resultMessage");
-
-
-    if (hasInsurance) {
-
-        resultMoney.innerText =
-            "¥250,000";
-
-        resultMessage.innerText =
-            "保険から給付を受け取ることで、\n\
-             手元のお金への影響を抑えられました。";
-
-    }
-
-    else {
-
-        resultMoney.innerText =
-            "¥150,000";
-
-        resultMessage.innerText =
-            "突然の出費によって、\n\
-             貯金が大きく減ってしまいました。";
-
-    }
-
 }
 
-
-/* ====================
-   ENDING
-===================== */
-
-function showEnding() {
-
+function showEnding(){
+    document.body.classList.remove("dark","black");
+    document.body.style.background = "#f5f4ef";
     showScreen("endingScreen");
-
 }
-
 </script>
-
 
 </body>
 </html>
